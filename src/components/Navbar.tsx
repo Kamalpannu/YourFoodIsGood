@@ -8,7 +8,7 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ onSearch }: NavbarProps) => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState<boolean | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
@@ -21,8 +21,7 @@ export const Navbar = ({ onSearch }: NavbarProps) => {
           setIsSignedIn(true);
         }
       })
-      .catch((error) => {
-        console.error("Failed to fetch user info:", error);
+      .catch(() => {
         setIsSignedIn(false);
       });
   }, []);
@@ -38,7 +37,7 @@ export const Navbar = ({ onSearch }: NavbarProps) => {
   const navigateToSignUp = () => router.push("/SignUp");
 
   return (
-    <div className="relative sticky top-0 flex justify-between items-center p-4 bg-black text-white shadow-lg overflow-visible">
+    <div className="relative sticky z-50 top-0 flex flex-col sm:flex-row justify-between items-center p-4 bg-black text-white shadow-lg overflow-visible">
       {/* Logo */}
       <div
         className="text-2xl font-extrabold cursor-pointer hover:opacity-90 w-auto"
@@ -49,13 +48,13 @@ export const Navbar = ({ onSearch }: NavbarProps) => {
 
       {/* Search Bar */}
       {isSignedIn && (
-        <div className="flex-1 flex justify-center">
+        <div className="w-full sm:w-auto sm:flex-1 sm:flex justify-center mt-4 sm:mt-0">
           <SearchBar onSearch={onSearch} />
         </div>
       )}
 
       {/* User Controls */}
-      <div className="flex space-x-4 items-center">
+      <div className="flex space-x-4 items-center mt-4 sm:mt-0">
         {isSignedIn ? (
           <>
             {/* Username */}
@@ -72,23 +71,25 @@ export const Navbar = ({ onSearch }: NavbarProps) => {
             </button>
           </>
         ) : (
-          <>
-            {/* Sign In Button */}
-            <button
-              className="px-4 py-2 rounded-lg text-sm md:text-base bg-gray-700 hover:bg-gray-600 transition duration-300"
-              onClick={navigateToSignIn}
-            >
-              Sign In
-            </button>
+          router.pathname === "/" && ( // Show Sign In/Sign Up only on Home Page
+            <>
+              {/* Sign In Button */}
+              <button
+                className="px-4 py-2 rounded-lg text-sm md:text-base bg-gray-700 hover:bg-gray-600 transition duration-300"
+                onClick={navigateToSignIn}
+              >
+                Sign In
+              </button>
 
-            {/* Sign Up Button */}
-            <button
-              className="px-4 py-2 rounded-lg text-sm md:text-base bg-blue-600 hover:bg-blue-700 transition duration-300"
-              onClick={navigateToSignUp}
-            >
-              Sign Up
-            </button>
-          </>
+              {/* Sign Up Button */}
+              <button
+                className="px-4 py-2 rounded-lg text-sm md:text-base bg-blue-600 hover:bg-blue-700 transition duration-300"
+                onClick={navigateToSignUp}
+              >
+                Sign Up
+              </button>
+            </>
+          )
         )}
       </div>
     </div>

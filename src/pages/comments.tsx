@@ -20,7 +20,7 @@ export async function getServerSideProps(context: any) {
   if (postId) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/comments?postId=${postId}`,
+        `${process.env.LINK}/api/comments?postId=${postId}`,
         {
           withCredentials: true,
           headers: {
@@ -39,11 +39,17 @@ export async function getServerSideProps(context: any) {
 
 export default function Comments({ initialComments }: { initialComments: Comment[] }) {
   const router = useRouter();
-  const { postId, videoHeading, createdBy } = router.query;
+  const { postId, videoHeading, createdBy, soldout } = router.query;
+
+  // Convert soldout query to boolean
+  const isSoldOut = soldout === 'true';  // Convert string 'true' to boolean
+
   const [comments, setComments] = useState<Comment[]>(initialComments || []);
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(false);
   const pusherRef = useRef<Pusher | null>(null);
+
+  console.log(soldout);
 
   useEffect(() => {
     if (!postId) return;
@@ -151,22 +157,29 @@ export default function Comments({ initialComments }: { initialComments: Comment
         )}
       </div>
 
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-xl">
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Write a comment..."
-          rows={4}
-          className="w-full p-3 border-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all ease-in-out"
-        />
-        <button
-          onClick={handleSendComment}
-          disabled={loading}
-          className="mt-4 w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-400 transition-all ease-in-out"
-        >
-          {loading ? 'Posting...' : 'Post Comment'}
-        </button>
-      </div>
+      {/* Conditionally render the comment section if the item is not sold out */}
+      {isSoldOut ? (
+        <div className="mt-8 bg-white p-6 rounded-lg shadow-xl">
+          <p className="text-lg text-gray-600 text-center">This item is sold out, and comments are disabled.</p>
+        </div>
+      ) : (
+        <div className="mt-8 bg-white p-6 rounded-lg shadow-xl">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Write a comment..."
+            rows={4}
+            className="w-full p-3 border-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all ease-in-out"
+          />
+          <button
+            onClick={handleSendComment}
+            disabled={loading}
+            className="mt-4 w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-400 transition-all ease-in-out"
+          >
+            {loading ? 'Posting...' : 'Post Comment'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

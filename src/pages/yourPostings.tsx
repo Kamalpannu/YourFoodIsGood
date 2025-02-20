@@ -27,7 +27,9 @@ export default function YourPostings({ initialPosts }: { initialPosts: any[] }) 
     <Navbar onSearch={(newQuery: string) => dispatch(setQuery(newQuery))} />
     <div className="flex p-4 space-x-4"> {/* Adjusted space between LeftBar and VideoGrid */}
       <div className="w-1/7">
-        <LeftBar />
+        <LeftBar locationRange={0} setLocationRange={function (newRange: number): void {
+            throw new Error("Function not implemented.");
+          } } />
       </div>
       <div className="w-4/5"> {/* Adjusted width for VideoGrid */}
         {error ? (
@@ -46,7 +48,7 @@ export default function YourPostings({ initialPosts }: { initialPosts: any[] }) 
 export async function getServerSideProps(context: any) {
   try {
     // API call to fetch posts for authenticated user
-    const response = await axios.get(`http://localhost:3000/api/verifyUser`, {
+    const response = await axios.get(`${process.env.LINK}/api/verifyUser`, {
       headers: {
         Cookie: context.req.headers.cookie || "",
       },

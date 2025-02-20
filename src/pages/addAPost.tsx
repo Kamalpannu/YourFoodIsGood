@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 const AddPost = () => {
   const [heading, setHeading] = useState('');
-  const [reviews, setReviews] = useState('');
+  const [price, setPrice] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [location, setLocation] = useState('');
@@ -46,7 +46,7 @@ const AddPost = () => {
 
     const formData = new FormData();
     formData.append('heading', heading);
-    formData.append('reviews', reviews);
+    formData.append('price', price);
     formData.append('file', file);
     formData.append('address', location);
 
@@ -105,12 +105,13 @@ const AddPost = () => {
         </label>
 
         <label className="block text-sm font-semibold mb-4">
-          Reviews
-          <textarea
-            value={reviews}
-            onChange={(e) => setReviews(e.target.value)}
+          Price
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             className="mt-2 block w-full border bg-gray-100 p-4 rounded-lg focus:ring-2 focus:ring-gray-700"
-            placeholder="Enter your reviews"
+            placeholder="Enter the price"
             required
           />
         </label>

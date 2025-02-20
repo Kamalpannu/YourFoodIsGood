@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
-
-export const LeftBar = () => {
+import React, { useState } from "react";
+import { useRouter } from "next/router";  // Import useRouter from Next.js
+interface LeftBarProps {
+    locationRange: number;
+    setLocationRange: (newRange: number) => void;
+  }
+export const LeftBar:React.FC<LeftBarProps>= ({locationRange,setLocationRange} ) => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const router = useRouter();
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };
 
+    const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLocationRange(parseInt(e.target.value, 10));
+        console.log("Selected Location Range:", e.target.value);
+    };
+
     return (
-        <div className="relative h-screen sticky top-0 mr-4">
+        <div className="relative h-screen sticky top-4 z-10 mr-4">
             <button
                 onClick={toggleSidebar}
                 className="sm:hidden p-2 fixed top-4 left-4 z-50 bg-gray-800 text-white rounded-lg mt-3"
@@ -30,7 +39,7 @@ export const LeftBar = () => {
             </button>
             <div
                 className={`fixed top-0 left-0 z-40 w-64 h-full bg-black text-white transition-transform transform ${
-                    isOpen ? 'translate-x-0' : '-translate-x-full'
+                    isOpen ? "translate-x-0" : "-translate-x-full"
                 } sm:translate-x-0 sm:relative sm:flex-col`}
             >
                 <div className="flex-grow mb-5">
@@ -109,6 +118,28 @@ export const LeftBar = () => {
                                 Your Postings
                             </a>
                         </div>
+                        {/* Location Filter Slider */}
+                        {router.pathname === "/postings" && (  // Use router.pathname to check current path
+                            <div className="p-4">
+                                <h3 className="text-lg font-semibold mb-2">
+                                    Filter by Location
+                                </h3>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="100"
+                                    value={locationRange}
+                                    onChange={handleRangeChange}
+                                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                                />
+                                <p className="mt-2 text-sm text-gray-300">
+                                    Distance:{" "}
+                                    <span className="font-bold">
+                                        {locationRange} km
+                                    </span>
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

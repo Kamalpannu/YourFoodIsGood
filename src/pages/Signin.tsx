@@ -23,7 +23,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  bg-gradient-to-b from-blue-50 to-white py-10 px-6">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white py-10 px-6">
       <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl ring-2 ring-black">
         <h2 className="text-3xl font-bold text-center text-black mb-4">
           Welcome Back
@@ -65,7 +65,7 @@ const SignIn = () => {
             Sign In
           </Button>
         </form>
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 mt-4">
           Don’t have an account?{' '}
           <Link href="/SignUp" className="text-black hover:underline">
             Sign Up

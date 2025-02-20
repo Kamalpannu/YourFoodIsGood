@@ -13,7 +13,7 @@ interface VideoDetails {
   id: number;
   imagelink: string;
   heading: string;
-  reviews: string;
+  price: string;
   location: Location;
   lat: number;
   lng: number;
@@ -30,7 +30,7 @@ const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
 
 export default function VideoDetails() {
   const router = useRouter();
-  const { id, imagelink, heading, reviews, location, lat, lng } = router.query;
+  const { id, imagelink, heading, price, location, lat, lng } = router.query;
 
   const [video, setVideo] = useState<VideoDetails | null>(null);
 
@@ -43,7 +43,7 @@ export default function VideoDetails() {
       id &&
       imagelink &&
       heading &&
-      reviews &&
+      price &&
       location &&
       lat !== undefined &&
       lng !== undefined
@@ -63,7 +63,7 @@ export default function VideoDetails() {
             id: parseInt(id as string, 10),
             imagelink: imagelink as string,
             heading: heading as string,
-            reviews: reviews as string,
+            price: price as string,
             location: locationObj,
             lat: parsedLat,
             lng: parsedLng,
@@ -71,7 +71,7 @@ export default function VideoDetails() {
         }
       }
     }
-  }, [id, imagelink, heading, reviews, location, lat, lng]);
+  }, [id, imagelink, heading, price, location, lat, lng]);
 
   const handleMapClick = () => {
     const googleMapsURL = `https://www.google.com/maps?q=${video?.lat},${video?.lng}`;
@@ -118,7 +118,7 @@ export default function VideoDetails() {
           <h1 className="text-3xl font-semibold text-gray-800 mt-4">
             {video.heading}
           </h1>
-          <p className="text-gray-600 mt-2">{video.reviews}</p>
+          <p className="text-gray-600 mt-2">Price: {video.price}</p>
 
           <div className="mt-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-2">Location:</h2>
