@@ -93,7 +93,7 @@ export function VideoCard(props: Video) {
 
   const confirmDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/verifyUser?id=${props.id}`, {
+      const res = await fetch(`/api/verifyUser?id=${props.id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -113,7 +113,7 @@ export function VideoCard(props: Video) {
 
   const confirmUpdate = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/verifyUser?id=${props.id}`, {
+      const res = await fetch(`/api/verifyUser?id=${props.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ heading: updatedHeading, price: updatedPrice, soldOut }),
