@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
-import { Button } from "@/components/ui/button"; // Assuming you have the Button component in ShadCN
+import { Button } from "@/components/ui/button";
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
