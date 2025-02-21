@@ -15,7 +15,7 @@ const SignUp = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post(`${process.env.LINK}/api/auth/signup`, { username, email, password }, { withCredentials: true });
+      const response = await axios.post(`/api/auth/signup`, { username, email, password }, { withCredentials: true });
       console.log("Sign-up successful");
       router.push('/postings');
     } catch (err: any) {
