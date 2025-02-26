@@ -1,40 +1,104 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# YourFoodIsGood
 
-## Getting Started
+## 🚀 Overview
+YourFoodIsGood is a **Next.js** web application that allows users to post images of food, comment on them, and make purchases. The app utilizes **Cloudinary** for image storage and **Pusher** for real-time interactions.
 
-First, run the development server:
+---
 
+## 🛠️ Features
+- 📸 **Post & View Images** (Users can upload food images)
+- 💬 **Commenting System** (Engage with other users via comments)
+- 🛒 **Purchase Option** (Users can buy food items)
+- ☁️ **Cloud Storage** (Images are stored in **Cloudinary**)
+- 🔐 **Authentication**
+- 📍 **Google Maps Integration** (Location-based features using **Google Maps API**)
+
+---
+
+## ⚙️ Tech Stack
+- **Framework:** Next.js
+- **Storage:** Cloudinary
+- **Real-time Updates:** Pusher
+- **Styling:** Tailwind CSS
+- **Database:** Prisma
+- **Deployment:** Render
+
+---
+
+## 🔧 Installation & Setup
+### **1️⃣ Clone the Repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Kamalpannu/YourFoodIsGood.git
+cd YourFoodIsGood
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **2️⃣ Install Dependencies**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### **3️⃣ Configure Environment Variables**
+Create a `.env` file in the root directory and add the following:
+```env
+NEXTAUTH_SECRET
+JWT_SECRET
+NEXT_PUBLIC_PUSHER_APP_ID
+NEXT_PUBLIC_PUSHER_KEY
+PUSHER_SECRET
+NEXT_PUBLIC_PUSHER_CLUSTER
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+NEXT_PUBLIC_GOOGLE_MAP_API_KEY
+LINK
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### **4️⃣ Run the Development Server**
+```bash
+npm run dev
+```
+Access the app at **http://localhost:3000**.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🚀 Deployment
+### **Deployed To Render**
+https://yourfoodisgood4.onrender.com
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project Structure
+```
+YourFoodIsGood/
+│-- lib/
+│-- prisma/
+│-- public/
+│-- src/
+│   ├── components/
+│   ├── pages/
+│   ├── styles/
+│   ├── utils/
+│-- .env
+│-- .gitignore
+│-- README.md
+│-- next.config.mjs
+│-- package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🛠️ Future Enhancements
+- ✅ **User Profiles** (Add profile pictures & bio)
+- ✅ **Enhanced Payment System** (Integrate Stripe for secure transactions)
+- ✅ **Notifications** (Real-time updates on purchases & comments)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
+Feel free to **fork** this repository and submit **pull requests**! 😊
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## 📞 Contact
+For any queries, reach out at: **preetkamalsingh986@gmail.com** or find me on GitHub: [Kamalpannu](https://github.com/Kamalpannu)
+
