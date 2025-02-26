@@ -40,6 +40,7 @@ npm install
 ### **3️⃣ Configure Environment Variables**
 Create a `.env` file in the root directory and add the following:
 ```env
+DATABASE_URL
 NEXTAUTH_SECRET
 JWT_SECRET
 NEXT_PUBLIC_PUSHER_APP_ID
